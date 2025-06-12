@@ -1,0 +1,28 @@
+services:
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: newshub-backend
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  # Frontend Web
+  frontend:
+    build: ./frontend
+    container_name: newshub-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  default:
+    name: newshub-network
