@@ -1,19 +1,12 @@
 {
   "version": 2,
-  "builds": [
+  "outputDirectory": "frontend/public",
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "rewrites": [
     {
-      "src": "frontend/public/**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/public/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/frontend/public/index.html"
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ],
   "headers": [
@@ -21,12 +14,12 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         }
       ]
     }
